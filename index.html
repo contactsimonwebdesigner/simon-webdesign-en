@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111310">
+  <meta name="description" content="Šimon Opatrný — designing and building modern websites for entrepreneurs and companies. Explore my work and tell me about your project.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Šimon Opatrný — Web Design &amp; Development">
+  <meta property="og:description" content="Distinctive websites with thoughtful design. Portfolio and collaboration.">
+  <meta property="og:url" content="https://simonopatrny.github.io/simon-webdesign/">
+  <title>Šimon Opatrný — Web Design &amp; Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#171915; --paper:#f5f5ee; --white:#ffffff; --black:#111310;
+      --muted:#687069; --lime:#d9fa64; --rule:rgba(23,25,21,.14);
+      --font-display:'Space Grotesk', 'Arial Narrow', Arial, sans-serif;
+      --font-body:'DM Sans', Arial, sans-serif;
+      --ease:cubic-bezier(.22,1,.36,1);
+      --container:1376px;
+    }
+    *,*::before,*::after {box-sizing:border-box}
+    * {margin:0}
+    html {scroll-behavior:smooth;scroll-padding-top:96px}
+    body {font-family:var(--font-body);color:var(--ink);background:var(--paper);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    body.locked {overflow:hidden}
+    ::selection{background:var(--lime);color:var(--ink)}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    button,select,input,textarea{border-radius:0}
+    img,svg{display:block;max-width:100%}
+    :focus-visible{outline:3px solid #7b9e17;outline-offset:4px}
+    .container{width:min(calc(100% - 96px),var(--container));margin-inline:auto}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .skip{position:fixed;top:10px;left:10px;z-index:4000;background:var(--lime);color:var(--ink);padding:12px;transform:translateY(-160%)}
+    .skip:focus{transform:none}
+    .icon{width:18px;height:18px;stroke:currentColor;stroke-width:1.65;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}
+    .meta{font-size:11px;line-height:1.3;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .muted{color:var(--muted)}
+    .rule{height:1px;background:var(--rule)}
+    .eyebrow{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em}
+    .eyebrow::before{content:"";width:32px;height:1px;background:currentColor}
+    .display{font-family:var(--font-display);font-weight:600;letter-spacing:-.065em;line-height:.96}
+    .section{padding:130px 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:36px;margin-bottom:55px}
+    .section-head h2{font-size:clamp(52px,7vw,106px);max-width:900px}
+    .section-head p{max-width:310px;font-size:15px;color:var(--muted);padding-bottom:5px}
+    .section-label{margin-bottom:28px;color:#586152}
+    .section-title{font-size:clamp(51px,7vw,104px)}
+    .pill{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid rgba(255,255,255,.26);border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+    .dot{width:7px;height:7px;flex:none;background:var(--lime);border-radius:50%;box-shadow:0 0 0 5px rgba(217,250,100,.10)}
+    .btn{position:relative;isolation:isolate;display:inline-flex;justify-content:center;align-items:center;gap:25px;min-height:58px;padding:0 23px;border:1px solid transparent;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease),transform .3s var(--ease)}
+    .btn svg{width:17px;height:17px;transition:transform .4s var(--ease)}
+    .btn:hover svg{transform:translate(3px,-3px)}
+    .btn-lime{background:var(--lime);color:var(--ink)}
+    .btn-lime:hover{background:#f0ffb5}
+    .btn-ink{background:var(--ink);color:var(--white)}
+    .btn-ink:hover{background:#3d4035}
+    .btn-outline{color:white;border-color:rgba(255,255,255,.35)}
+    .btn-outline:hover{background:rgba(255,255,255,.1);border-color:white}
+    .link-arrow{display:inline-flex;align-items:center;gap:11px;font-size:13px;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:7px;transition:gap .3s}
+    .link-arrow:hover{gap:19px}
+    .link-arrow .icon{width:16px;height:16px}
+    /* navigation */
+    .progress-line{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--lime);transform:scaleX(0);transform-origin:left;z-index:1300;pointer-events:none}
+    .site-header{position:fixed;z-index:1200;top:0;left:0;width:100%;background:rgba(247,247,240,.96);border-bottom:1px solid rgba(23,25,21,.09);transition:box-shadow .3s,background .3s;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .site-header.scrolled{box-shadow:0 12px 35px rgba(0,0,0,.06)}
+    .nav{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+    .brand{display:flex;align-items:center;gap:12px;position:relative;z-index:1203}
+    .brand-mark{height:41px;width:41px;display:grid;place-items:center;background:var(--ink);color:var(--lime);font-family:var(--font-display);font-weight:700;font-size:21px;letter-spacing:-.12em;border-radius:50%;padding-right:3px;transition:transform .6s var(--ease)}
+    .brand:hover .brand-mark{transform:rotate(-24deg)}
+    .brand-text{font-family:var(--font-display);font-weight:700;font-size:16px;letter-spacing:-.055em;line-height:1.07}
+    .brand-text small{display:block;font-family:var(--font-body);color:#7d857b;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-top:5px}
+    .desktop-nav{display:flex;align-items:center;gap:35px}
+    .desktop-nav a:not(.nav-contact){position:relative;font-weight:600;font-size:12px;transition:color .25s}
+    .desktop-nav a:not(.nav-contact)::after{content:"";position:absolute;left:0;bottom:-8px;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+    .desktop-nav a:hover::after,.desktop-nav a.active::after{transform:scaleX(1)}
+    .nav-contact{display:inline-flex;align-items:center;gap:17px;background:var(--ink);padding:12px 17px;color:white;font-size:12px;font-weight:700;transition:background .2s}
+    .nav-contact:hover{background:#3e4431}
+    .nav-contact .icon{width:15px;height:15px}
+    .menu-btn{display:none;z-index:1203;position:relative;width:44px;height:44px;border:1px solid var(--rule);background:transparent;color:var(--ink);align-items:center;justify-content:center}
+    .menu-btn span{position:absolute;width:21px;height:1.5px;background:currentColor;transition:transform .3s,top .3s;top:17px}
+    .menu-btn span:last-child{top:25px}
+    .menu-btn[aria-expanded="true"] span:first-child{top:21px;transform:rotate(45deg)}
+    .menu-btn[aria-expanded="true"] span:last-child{top:21px;transform:rotate(-45deg)}
+    .mobile-panel{display:none}
+    /* hero */
+    .hero{min-height:min(850px,100svh);min-height:max(740px,100svh);background:var(--black);color:white;position:relative;overflow:hidden;padding:190px 0 92px;isolation:isolate}
+    .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:84px 84px;mask-image:linear-gradient(90deg,transparent,black 50%);pointer-events:none}
+    .hero::after{content:"";position:absolute;width:800px;height:800px;right:-300px;top:6%;background:radial-gradient(circle,rgba(217,250,100,.095),transparent 64%);z-index:-1;pointer-events:none}
+    .hero-inner{display:grid;grid-template-columns:1.09fr .91fr;align-items:center;gap:26px;position:relative;z-index:2}
+    .hero-copy{position:relative;z-index:3}
+    .hero .eyebrow{color:#b9c5ad;margin-bottom:37px}
+    .hero h1{font-size:clamp(76px,7.9vw,140px);max-width:920px;line-height:.94}
+    .hero h1 .line{display:block;white-space:nowrap;overflow:visible}
+    .hero h1 .accent{color:var(--lime);position:relative}
+    .hero h1 .thin{font-weight:400}
+    .hero-intro{max-width:540px;margin-top:37px;color:#b0b5ac;font-size:17px;line-height:1.8}
+    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:35px}
+    .hero-notes{display:flex;align-items:center;gap:12px;margin-top:48px;color:#9da798;font-size:11px;letter-spacing:.06em}
+    .hero-notes .line{height:1px;width:38px;background:#485047}
+    .hero-art{height:630px;position:relative;perspective:1100px;--mx:0;--my:0;min-width:0}
+    .art-orbit{position:absolute;width:580px;height:580px;border:1px solid rgba(217,250,100,.11);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+    .art-orbit::before{content:"";position:absolute;inset:60px;border:1px dashed rgba(255,255,255,.08);border-radius:50%}
+    .art-browser{position:absolute;box-shadow:0 35px 100px rgba(0,0,0,.55);overflow:hidden;transition:transform .8s var(--ease)}
+    .art-browser-a{width:86%;max-width:530px;height:354px;top:77px;right:-2%;background:#f1f1ec;transform:rotate(7deg) translate(calc(var(--mx)*-6px),calc(var(--my)*-6px));border:1px solid rgba(255,255,255,.18)}
+    .art-browser-a:hover{transform:rotate(3deg) translateY(-10px)}
+    .art-browser-b{width:65%;max-width:375px;height:320px;bottom:50px;left:-2%;background:#0b0a0b;transform:rotate(-11deg) translate(calc(var(--mx)*9px),calc(var(--my)*9px));border:1px solid #323232}
+    .art-browser-b:hover{transform:rotate(-6deg) translateY(-10px)}
+    .browser-bar{height:28px;background:#e8e9e5;display:flex;align-items:center;gap:5px;padding:0 12px;border-bottom:1px solid #d8d9d2}
+    .browser-bar i{display:block;width:6px;height:6px;border:1px solid #a9aea6;border-radius:50%}
+    .browser-bar span{margin:auto;font-size:8px;color:#69736d;font-family:var(--font-display);font-weight:700;letter-spacing:.07em}
+    .bar-dark{background:#1a1919;border-bottom-color:#383535}.bar-dark i{border-color:#595858}.bar-dark span{color:#93908c}
+    .window-nova{color:#13212d;padding:26px 30px;height:calc(100% - 28px);position:relative;background:linear-gradient(120deg,#f8f9f6,#dce7eb)}
+    .window-nova .micro{display:flex;justify-content:space-between;font-size:9px;font-weight:700;letter-spacing:.05em}
+    .window-nova h3{font-family:var(--font-display);font-size:41px;line-height:.98;letter-spacing:-.065em;margin-top:37px;font-weight:700}
+    .window-nova h3 em{font-style:normal;color:#3b6bc9}
+    .window-nova .fake-p{width:58%;height:4px;background:#a9b4bb;opacity:.75;margin-top:22px;box-shadow:0 11px 0 #c2cbd0,0 22px 0 #cbd3d5}
+    .window-nova .fake-cta{display:inline-block;font-size:8px;background:#3561c8;color:#fff;padding:10px;margin-top:35px;font-weight:700}
+    .window-nova .deco{position:absolute;right:-13px;bottom:-45px;width:210px;height:210px;border:1px solid #abbfcb;border-radius:50%;box-shadow:0 0 0 30px rgba(100,140,160,.07)}
+    .window-ink{padding:25px;height:calc(100% - 28px);position:relative;color:#f3ebe8;background:radial-gradient(circle at 80% 80%,#291116,transparent 52%),#09090a}
+    .window-ink .micro{font-size:9px;letter-spacing:.3em;color:#e1d7d3}
+    .window-ink h3{font-family:var(--font-display);font-size:clamp(35px,4vw,59px);font-weight:700;letter-spacing:-.075em;line-height:.88;margin-top:59px}
+    .window-ink h3 b{display:block;color:#d13b4c}
+    .window-ink::after{content:"";position:absolute;width:175px;height:175px;border:1px solid rgba(209,59,76,.6);transform:rotate(45deg);right:-70px;bottom:-76px}
+    .art-sticker{position:absolute;right:-12px;bottom:63px;width:119px;height:119px;background:var(--lime);border-radius:50%;color:var(--ink);display:grid;place-items:center;transform:rotate(15deg);box-shadow:0 13px 50px rgba(0,0,0,.3)}
+    .art-sticker svg{width:52px;height:52px;stroke-width:1}
+    .art-label{position:absolute;right:10%;top:23px;color:#b0b6a8;font-size:10px;letter-spacing:.19em;text-transform:uppercase;transform:rotate(7deg)}
+    .hero-foot{position:absolute;bottom:33px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;gap:20px;color:#7e887c;font-size:10px;letter-spacing:.14em;text-transform:uppercase;z-index:3}
+    .scroll-cue{display:flex;align-items:center;gap:12px}.scroll-cue i{height:36px;width:1px;background:var(--lime);animation:scrollCue 2s ease-in-out infinite}
+    @keyframes scrollCue{50%{transform:scaleY(.45);transform-origin:top}}
+    /* manifesto band */
+    .ticker{background:var(--lime);color:var(--ink);overflow:hidden;padding:18px 0;white-space:nowrap;border-block:1px solid #c4e551}
+    .ticker-track{display:flex;gap:0;width:max-content;animation:marquee 40s linear infinite}
+    .ticker-track span{display:inline-flex;align-items:center;gap:42px;padding-right:42px;font-family:var(--font-display);font-size:17px;font-weight:700;letter-spacing:-.03em;text-transform:uppercase}
+    .ticker-track svg{width:18px;height:18px;transform:rotate(45deg)}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+    /* intro */
+    .intro{padding:135px 0;background:var(--paper)}
+    .intro-grid{display:grid;grid-template-columns:.62fr 1.38fr;gap:80px}
+    .intro-left{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}
+    .intro-left .small-signature{font-family:var(--font-display);font-size:28px;font-weight:700;letter-spacing:-.085em}
+    .intro .big-intro{font-family:var(--font-display);font-weight:500;font-size:clamp(32px,4.45vw,69px);letter-spacing:-.053em;line-height:1.2}
+    .intro .big-intro .quiet{color:#969d92}
+    .intro-bottom{display:flex;align-items:end;justify-content:space-between;gap:36px;margin-top:35px}
+    .intro-bottom p{font-size:15px;max-width:445px;color:var(--muted)}
+    /* work */
+    .work{padding:125px 0 142px;background:#e9ebe2}
+    .work .section-head{margin-bottom:48px}
+    .filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:31px}
+    .filter{background:transparent;border:1px solid #bdc5b9;color:#596259;padding:10px 17px;border-radius:100px;font-size:12px;font-weight:700;transition:background .2s,color .2s,border-color .2s}
+    .filter:hover,.filter[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:white}
+    .projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+    .project-card{min-width:0;transition:opacity .3s,transform .3s}
+    .project-card[hidden]{display:none!important}
+    .project-card:nth-child(3n){grid-column:span 2}
+    .project-preview{display:block;position:relative;overflow:hidden;aspect-ratio:1.39;background:#d8dad0;color:white;isolation:isolate}
+    .project-card:nth-child(3n) .project-preview{aspect-ratio:2.55}
+    .project-card:not(:nth-child(3n)):has(.project-photo) .project-preview{aspect-ratio:1.9}
+    .project-preview::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .5s;pointer-events:none}
+    .project-preview:hover::after{background:rgba(0,0,0,.06)}
+    .mock-scene{position:absolute;inset:0;transition:transform .9s var(--ease);overflow:hidden}
+    .project-preview:hover .mock-scene{transform:scale(1.045)}
+    .open-project{position:absolute;z-index:5;right:25px;top:25px;width:53px;height:53px;display:grid;place-items:center;border-radius:50%;background:var(--lime);color:var(--ink);transform:rotate(-45deg);transition:transform .5s var(--ease),background .3s}
+    .open-project svg{width:22px;height:22px}
+    .project-preview:hover .open-project{transform:rotate(0deg);background:white}
+    .project-number{position:absolute;z-index:3;bottom:21px;left:24px;color:rgba(255,255,255,.8);font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.14em}
+    .project-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:2}
+    .project-card:has(.project-photo) .project-number{background:rgba(17,25,22,.85);color:#fff;padding:5px 9px;border-radius:3px}
+    @media(max-width:650px){.project-photo{object-position:32% top}}
+    /* mock webpage designs are purpose-made graphical previews, not actual screenshots */
+    .scene-nova{background:#111e2e;color:white;padding:7% 8%;display:flex;flex-direction:column;justify-content:flex-start}
+    .scene-nova::before{content:"";position:absolute;width:70%;height:95%;right:-14%;top:4%;border:1px solid #2f4057;border-radius:50%;box-shadow:0 0 0 60px rgba(86,145,206,.035)}
+    .scene-nova .site-mini-nav{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;max-width:100%;font-family:var(--font-display);font-size:clamp(10px,1.1vw,16px);font-weight:700}
+    .scene-nova .site-mini-nav span:nth-child(2){font-size:8px;letter-spacing:.14em;color:#c5d8f7}
+    .scene-nova .site-mini-title{font-family:var(--font-display);font-weight:700;letter-spacing:-.07em;line-height:1;position:relative;z-index:1;margin-top:12%;font-size:clamp(32px,3.7vw,64px)}
+    .scene-nova .site-mini-title em{font-style:normal;color:#b4cfff}
+    .scene-nova .site-mini-footer{display:flex;align-items:center;gap:15px;margin-top:23px;position:relative;z-index:1}
+    .scene-nova .site-mini-footer span{background:#3466e8;padding:10px 15px;font-size:8px;font-weight:700}
+    .scene-nova .site-mini-footer b{height:3px;width:60px;background:#71849d;box-shadow:0 9px #43556a;opacity:.5}
+    .scene-nova .nova-paper{position:absolute;right:3.8%;top:24%;width:36%;height:61%;background:#f2f5fa;color:#112136;transform:rotate(7deg);box-shadow:0 25px 45px rgba(0,0,0,.28);padding:6%;font-size:13px;font-weight:700}
+    .scene-nova .nova-paper span{display:block;font-size:clamp(11px,1.6vw,24px);letter-spacing:-.065em;line-height:1.15;margin-top:23px}
+    .scene-nova .nova-paper i{display:block;height:9px;background:#d5deea;margin-top:28px;box-shadow:0 16px #e2e8f1,0 32px #d9e3ec}
+    .scene-ink{background:#09090a;color:#f6f3f1;padding:8% 9%;display:flex;flex-direction:column;justify-content:center}
+    .scene-ink::before{content:"";position:absolute;width:56%;aspect-ratio:1;right:-12%;top:-15%;background:radial-gradient(circle,rgba(147,27,39,.45),transparent 62%)}
+    .scene-ink::after{content:"";position:absolute;width:40%;aspect-ratio:1;border:1px solid #612028;transform:rotate(34deg);right:4%;top:16%}
+    .scene-ink .ink-mini-label{font-size:clamp(7px,.85vw,10px);font-weight:700;letter-spacing:.34em;color:#e44c5d;margin-bottom:24px;z-index:1}
+    .scene-ink .ink-mini-headline{font-family:var(--font-display);font-size:clamp(45px,6vw,93px);line-height:.8;letter-spacing:-.085em;font-weight:700;z-index:1}
+    .scene-ink .ink-mini-headline span{color:#d83c4d}
+    .scene-ink .ink-mini-bottom{font-size:9px;letter-spacing:.24em;color:#aa9b9a;z-index:1;margin-top:35px}
+    .scene-culture{background:#e7e1d4;color:#141c22;padding:5% 6%;display:flex;flex-direction:column;justify-content:center}
+    .scene-culture::before{content:"";position:absolute;right:5%;top:-25%;width:45%;height:135%;background:#c65b48;transform:rotate(19deg);border-radius:44% 54% 42% 53%}
+    .scene-culture::after{content:"";position:absolute;right:18%;top:2%;width:31%;height:88%;border:2px solid #fff1df;border-radius:50%;transform:rotate(-22deg)}
+    .scene-culture .culture-mini-nav{position:absolute;top:10%;left:6%;font-family:var(--font-display);font-weight:700;font-size:clamp(12px,1.7vw,21px);letter-spacing:-.06em}
+    .scene-culture .culture-mini-headline{position:relative;z-index:1;font-family:var(--font-display);font-size:clamp(45px,7vw,100px);line-height:.89;letter-spacing:-.09em;font-weight:700}
+    .scene-culture .culture-mini-headline span{display:block;color:#b64431}
+    .scene-culture .culture-mini-sub{position:relative;z-index:1;font-size:clamp(8px,.85vw,12px);font-weight:700;letter-spacing:.18em;margin-top:26px}
+    .scene-generic{background:radial-gradient(circle at 75% 40%,#3a5352,transparent 40%),#192e2c;padding:9%;display:flex;justify-content:center;flex-direction:column}
+    .scene-generic::before{content:"";position:absolute;width:43%;aspect-ratio:1;border:2px solid rgba(217,250,100,.5);border-radius:50%;right:9%;top:18%}
+    .scene-generic .generic-title{font-family:var(--font-display);font-size:clamp(35px,5vw,75px);line-height:.94;letter-spacing:-.07em;font-weight:700;position:relative;z-index:1;max-width:75%}
+    .scene-generic .generic-sub{position:relative;z-index:1;margin-top:22px;text-transform:uppercase;font-size:10px;letter-spacing:.17em;color:#d4edbd}
+    .project-info{display:flex;justify-content:space-between;align-items:start;gap:20px;padding:23px 1px 12px}
+    .project-info h3{font-family:var(--font-display);font-size:clamp(25px,2.6vw,37px);line-height:1.12;letter-spacing:-.055em;font-weight:700;margin-top:8px}
+    .project-info p{font-size:13px;color:var(--muted);max-width:490px;margin-top:10px}
+    .project-info .project-visit{white-space:nowrap;margin-top:9px;display:flex;gap:7px;align-items:center;font-size:12px;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:5px}
+    .project-info .project-visit svg{width:14px;height:14px}
+    .project-type{color:#5b6658;font-size:10px;letter-spacing:.17em;text-transform:uppercase;font-weight:700}
+    .work-end{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:55px;padding-top:26px;border-top:1px solid #bfc5b9}
+    .work-end p{font-size:14px;color:#4e584c}
+    /* services */
+    .services{background:var(--paper)}
+    .service-list{border-top:1px solid var(--rule);margin-top:70px}
+    .service-row{display:grid;grid-template-columns:75px 1fr 1fr 30px;align-items:center;gap:26px;padding:32px 15px 32px 3px;border-bottom:1px solid var(--rule);transition:background .35s,padding .35s var(--ease)}
+    .service-row:hover{background:#ecefe5;padding-inline:20px}
+    .service-row .index{font-size:12px;color:#858e82;font-weight:700}
+    .service-row h3{font-family:var(--font-display);font-size:clamp(25px,3vw,41px);letter-spacing:-.055em;line-height:1.06;font-weight:600}
+    .service-row p{font-size:14px;color:#616b60;max-width:395px}
+    .service-row .icon{width:23px;height:23px;transition:transform .3s}
+    .service-row:hover .icon{transform:translate(4px,-4px)}
+    /* dark statement */
+    .statement{position:relative;background:var(--black);color:#f6f7f1;overflow:hidden;padding:140px 0}
+    .statement::after{content:"✳";font-family:Arial,sans-serif;position:absolute;color:#1e231b;font-size:780px;right:-120px;top:-330px;line-height:1;pointer-events:none}
+    .statement .container{position:relative;z-index:1}
+    .statement h2{max-width:1030px;font-size:clamp(54px,7.4vw,119px);letter-spacing:-.067em;line-height:1.01;margin-top:32px}
+    .statement h2 em{font-style:normal;color:var(--lime)}
+    .statement-row{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-top:60px}
+    .statement-row p{max-width:490px;color:#b0b8ab;font-size:16px}
+    /* process */
+    .process{padding:137px 0;background:#e9ebe2}
+    .process-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:65px;border-top:1px solid #bdc4b7}
+    .process-item{padding:32px 24px 22px 0;min-height:295px;border-right:1px solid #bdc4b7;position:relative}
+    .process-item:not(:first-child){padding-left:24px}
+    .process-item:last-child{border-right:0}
+    .process-num{font-family:var(--font-display);font-weight:500;font-size:59px;letter-spacing:-.07em;color:#b0b9a8}
+    .process-item h3{font-family:var(--font-display);font-size:23px;letter-spacing:-.045em;margin:41px 0 12px;line-height:1.2}
+    .process-item p{font-size:13px;color:#5d675b}
+    /* faq */
+    .faq{background:var(--paper)}
+    .faq-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:80px}
+    .faq-intro h2{font-size:clamp(48px,5.1vw,75px)}
+    .faq-intro p{margin-top:24px;max-width:360px;color:var(--muted);font-size:15px}
+    .faq-items{border-top:1px solid var(--rule)}
+    details{border-bottom:1px solid var(--rule)}
+    summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 0;font-family:var(--font-display);font-size:20px;font-weight:600;letter-spacing:-.035em}
+    summary::-webkit-details-marker{display:none}
+    summary .faq-toggle{width:30px;height:30px;display:grid;place-items:center;border:1px solid #bdc5b8;border-radius:50%;flex:none;transition:background .25s,color .25s,transform .3s}
+    summary .faq-toggle::before{content:"+";font-family:Arial,sans-serif;font-weight:400;font-size:19px;line-height:1}
+    details[open] .faq-toggle{transform:rotate(45deg);background:var(--ink);color:white}
+    details p{padding:0 65px 24px 0;color:var(--muted);font-size:14px;line-height:1.8;animation:answerFade .3s ease}
+    @keyframes answerFade{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+    /* contact */
+    .contact{background:var(--lime);padding:145px 0 0;overflow:hidden;position:relative}
+    .contact-top{display:flex;justify-content:space-between;gap:80px;align-items:end}
+    .contact h2{font-family:var(--font-display);font-size:clamp(65px,10.4vw,160px);line-height:.86;letter-spacing:-.085em;font-weight:700;max-width:900px;margin-top:35px}
+    .contact h2 span{display:block;font-weight:400}
+    .contact-top p{max-width:290px;padding-bottom:8px;font-size:16px}
+    .contact-main{display:grid;grid-template-columns:1fr 1fr;gap:120px;margin-top:100px;padding-bottom:122px}
+    .contact-identity{display:flex;flex-direction:column;justify-content:space-between;gap:45px}
+    .contact-email{font-family:var(--font-display);font-weight:600;font-size:clamp(19px,2.4vw,32px);letter-spacing:-.055em;word-break:break-word;display:inline-block;border-bottom:1px solid var(--ink);padding-bottom:11px}
+    .copy-email{border:1px solid var(--ink);padding:10px 14px;background:transparent;color:var(--ink);font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px;margin-top:17px;transition:background .25s}
+    .copy-email:hover{background:rgba(0,0,0,.07)}
+    .copy-email .icon{width:16px;height:16px}
+    .contact-personal{font-size:13px;max-width:290px;line-height:1.8}
+    .brief-form{background:var(--ink);color:white;padding:37px}
+    .form-heading{font-family:var(--font-display);font-size:27px;font-weight:600;letter-spacing:-.045em;margin-bottom:7px}
+    .form-lead{font-size:13px;color:#9fa79b;margin-bottom:29px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .field{margin-bottom:18px}
+    .field label{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;color:#bfc9b6}
+    .field input,.field textarea,.field select{width:100%;background:#22251e;color:white;border:1px solid #484d40;border-radius:0;padding:13px 14px;outline:0;font-size:13px;transition:border-color .25s,background .25s}
+    .field textarea{min-height:102px;resize:vertical}
+    .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--lime);background:#2a2e23}
+    .field input::placeholder,.field textarea::placeholder{color:#929b8d}
+    .field select option{background:#22251e;color:white}
+    .brief-form .btn{width:100%;justify-content:space-between}
+    .form-note{font-size:11px;color:#9fa79b;line-height:1.6;margin-top:14px}
+    /* footer */
+    .footer{background:#111310;color:white;padding:65px 0 30px}
+    .footer-top{display:flex;align-items:start;justify-content:space-between;gap:50px;padding-bottom:75px}
+    .footer-title{font-family:var(--font-display);font-size:clamp(35px,4vw,60px);letter-spacing:-.065em;line-height:1}
+    .footer-title span{color:var(--lime)}
+    .footer-right{display:flex;gap:70px}
+    .footer-right div{display:flex;flex-direction:column;gap:12px}
+    .footer-right strong{font-size:10px;letter-spacing:.14em;color:#9fa89e;text-transform:uppercase;margin-bottom:5px}
+    .footer-right a{font-size:13px;color:#d6dbd1;transition:color .2s}
+    .footer-right a:hover{color:var(--lime)}
+    .footer-bottom{border-top:1px solid #343831;padding-top:25px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#929c90;font-size:11px}
+    .backtop{display:inline-flex;align-items:center;gap:8px;color:#e8eedd}
+    .backtop:hover{color:var(--lime)}
+    /* scroll reveal: only opt-in when browser can observe */
+    .js-reveal .reveal{opacity:0;transform:translateY(38px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+    .js-reveal .reveal.in-view{opacity:1;transform:none}
+    .js-reveal .reveal[data-delay="1"]{transition-delay:.1s}.js-reveal .reveal[data-delay="2"]{transition-delay:.19s}.js-reveal .reveal[data-delay="3"]{transition-delay:.28s}
+    .hero .hero-in{animation:heroRise .95s var(--ease) both}.hero .hero-in:nth-child(2){animation-delay:.12s}.hero .hero-in:nth-child(3){animation-delay:.24s}.hero .hero-in:nth-child(4){animation-delay:.34s}
+    @keyframes heroRise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+    @media(min-width:1500px){.hero{padding-top:210px}.hero-art{height:670px}}
+    @media(max-width:1200px){.container{width:min(calc(100% - 60px),var(--container))}.hero h1{font-size:clamp(68px,8.2vw,112px)}.hero-art{height:540px}.art-browser-a{right:-9%}.art-browser-b{left:-9%}.art-sticker{right:-9%}.service-row{grid-template-columns:55px 1fr 1fr 26px}.scene-nova .nova-paper{opacity:.85}}
+    @media(max-width:920px){.desktop-nav{display:none}.menu-btn{display:flex}.mobile-panel{display:flex;position:fixed;inset:84px 0 0;background:var(--paper);z-index:1201;flex-direction:column;padding:45px 30px;gap:18px;visibility:hidden;opacity:0;transform:translateY(-15px);transition:opacity .35s,transform .35s,visibility .35s;overflow-y:auto}.mobile-panel.open{visibility:visible;opacity:1;transform:none}.mobile-panel a{font-family:var(--font-display);font-size:clamp(35px,8vw,57px);line-height:1.14;letter-spacing:-.055em;font-weight:700;padding:10px 0;border-bottom:1px solid var(--rule)}.mobile-panel .mobile-contact{font-size:17px;background:var(--ink);color:white;padding:17px 20px;margin-top:24px;text-align:center;border:0}.hero{min-height:unset;padding:175px 0 95px}.hero-inner{grid-template-columns:1fr}.hero h1{font-size:clamp(79px,11vw,120px)}.hero-art{height:480px;max-width:620px;width:100%;margin:15px auto -10px}.art-browser-a{right:1%}.art-browser-b{left:1%}.art-sticker{right:1%}.art-label{right:15%}.intro-grid{grid-template-columns:1fr;gap:30px}.intro-left{flex-direction:row;align-items:center}.intro .big-intro{font-size:clamp(38px,6vw,65px)}.project-card:nth-child(3n) .project-preview{aspect-ratio:2}.scene-nova .nova-paper{display:none}.service-row{grid-template-columns:34px 1.2fr 1fr 24px;gap:12px}.process-grid{grid-template-columns:1fr 1fr}.process-item:nth-child(2){border-right:0}.process-item:nth-child(-n+2){border-bottom:1px solid #bdc4b7}.process-item:nth-child(3){padding-left:0}.faq-grid{grid-template-columns:1fr;gap:45px}.contact-top{display:block}.contact-top p{margin-top:35px}.contact-main{gap:40px}}
+    @media(max-width:650px){html{scroll-padding-top:74px}.container{width:calc(100% - 36px)}.nav{min-height:74px}.mobile-panel{inset:74px 0 0}.brand-text{font-size:14px}.brand-mark{width:38px;height:38px}.section{padding:90px 0}.hero{padding:133px 0 77px}.hero .eyebrow{margin-bottom:26px;font-size:9px}.hero h1{font-size:clamp(55px,12.9vw,84px);letter-spacing:-.07em}.hero h1 .line{white-space:normal}.hero-intro{font-size:15px;margin-top:28px}.hero-ctas{gap:10px}.hero-ctas .btn{min-height:54px;padding:0 17px;gap:14px}.hero-notes{margin-top:29px;font-size:10px}.hero-art{height:355px;margin-top:10px;margin-bottom:-20px}.art-orbit{height:340px;width:340px}.art-orbit::before{inset:35px}.art-browser-a{top:36px;right:0;width:80%;height:240px}.art-browser-b{bottom:21px;left:0;width:66%;height:211px}.browser-bar{height:20px}.window-nova,.window-ink{height:calc(100% - 20px)}.window-nova{padding:13px 17px}.window-nova h3{font-size:28px;margin-top:25px}.window-nova .micro{font-size:7px}.window-nova .fake-cta{margin-top:24px}.window-nova .deco{width:110px;height:110px}.window-ink{padding:15px}.window-ink h3{font-size:36px;margin-top:39px}.window-ink .micro{font-size:7px}.art-sticker{height:68px;width:68px;right:-2%;bottom:35px}.art-sticker svg{width:33px;height:33px}.art-label{top:8px;right:3%;font-size:8px}.hero-foot{bottom:17px;font-size:9px}.scroll-cue i{height:20px}.ticker{padding:13px 0}.ticker-track span{font-size:13px;gap:25px;padding-right:25px}.intro{padding:95px 0}.intro-left .small-signature{font-size:22px}.intro .big-intro{font-size:clamp(33px,8vw,51px)}.intro-bottom{flex-direction:column;align-items:start}.section-head{display:block;margin-bottom:35px}.section-head h2{font-size:clamp(52px,12vw,80px);margin-bottom:20px}.section-head p{max-width:460px}.work{padding:88px 0 95px}.projects-grid{grid-template-columns:1fr;gap:35px}.project-card:nth-child(3n){grid-column:auto}.project-preview,.project-card:nth-child(3n) .project-preview{aspect-ratio:1.25} .project-card:has(.project-photo) .project-preview{aspect-ratio:1.8}.scene-nova .site-mini-title{font-size:clamp(39px,10vw,57px);margin-top:18%}.scene-ink .ink-mini-headline{font-size:clamp(47px,11vw,70px)}.scene-culture .culture-mini-headline{font-size:clamp(48px,12vw,77px)}.scene-culture .culture-mini-nav{font-size:14px}.project-info{padding-top:16px;gap:10px}.project-info h3{font-size:27px}.project-info .project-visit{font-size:11px}.work-end{align-items:start;flex-direction:column}.service-list{margin-top:42px}.service-row{grid-template-columns:29px 1fr 23px;gap:9px;padding:21px 0}.service-row p{grid-column:2;grid-row:2}.service-row .icon{grid-column:3;grid-row:1}.service-row h3{font-size:27px}.service-row:hover{padding-inline:8px}.statement{padding:90px 0}.statement h2{font-size:clamp(45px,9.5vw,73px)}.statement::after{font-size:470px;right:-140px;top:-100px}.statement-row{display:block;margin-top:35px}.statement-row .btn{margin-top:27px}.process{padding:90px 0}.process-grid{grid-template-columns:1fr;margin-top:40px}.process-item,.process-item:not(:first-child){border-right:0;border-bottom:1px solid #bdc4b7;padding:22px 0;min-height:0}.process-item:first-child{border-top:0}.process-item h3{margin:4px 0 10px;font-size:26px}.process-num{font-size:43px}.faq-intro h2{font-size:56px}.faq-grid{gap:32px}summary{font-size:17px;padding:23px 0}details p{padding-right:15px}.contact{padding:95px 0 0}.contact h2{font-size:clamp(66px,13.5vw,91px)}.contact-main{grid-template-columns:1fr;gap:47px;margin-top:50px;padding-bottom:80px}.contact-email{font-size:27px}.brief-form{padding:24px}.form-grid{grid-template-columns:1fr;gap:0}.footer-top{display:block;padding-bottom:44px}.footer-right{margin-top:42px;gap:45px}.footer-title{font-size:48px}.footer-bottom{align-items:start;flex-direction:column;gap:15px}}
+    @media(max-width:370px){.hero h1{font-size:50px}.hero-ctas{flex-direction:column;align-items:stretch}.hero-art{height:320px}.art-browser-a{height:211px}.art-browser-b{height:190px}.window-nova h3{font-size:25px}.art-sticker{bottom:25px}.project-info{flex-direction:column}.project-info .project-visit{margin-top:0}.contact h2{font-size:61px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.js-reveal .reveal{opacity:1!important;transform:none!important}.hero .hero-in{animation:none!important}}
+  </style>
+</head>
+<body id="nahoru">
+  <a class="skip" href="#obsah">Skip to content</a>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="arrow-up-right" viewBox="0 0 24 24"><path d="M5 19 19 5M7 5h12v12"/></symbol>
+    <symbol id="arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol>
+    <symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-7-7 7 7 7-7"/></symbol>
+    <symbol id="spark" viewBox="0 0 24 24"><path d="M12 2c.7 5.3 4.7 9.3 10 10-5.3.7-9.3 4.7-10 10-.7-5.3-4.7-9.3-10-10 5.3-.7 9.3-4.7 10-10Z"/></symbol>
+    <symbol id="copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V4H4v12h4"/></symbol>
+  </svg>
+  <div class="progress-line" id="progressBar" aria-hidden="true"></div>
+  <header class="site-header" id="siteHeader">
+    <div class="container nav">
+      <a href="#nahoru" class="brand" aria-label="Šimon Opatrný, homepage">
+        <span class="brand-mark" aria-hidden="true">Š.</span>
+        <span class="brand-text">Šimon Opatrný<small>Web design &amp; development</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#projekty">Projects</a>
+        <a href="#sluzby">Services</a>
+        <a href="#postup">Working Together</a>
+        <a href="#otazky">FAQ</a>
+        <a href="#kontakt" class="nav-contact">Let's Work Together <svg class="icon"><use href="#arrow-up-right"/></svg></a>
+      </nav>
+      <button class="menu-btn" id="menuButton" type="button" aria-label="Open navigation" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+    <nav class="mobile-panel" id="mobileMenu" aria-label="Mobile navigation" inert>
+      <a href="#projekty">Projects</a><a href="#sluzby">Services</a><a href="#postup">Working Together</a><a href="#otazky">FAQ</a><a href="#kontakt" class="mobile-contact">Let's Work Together ↗</a>
+    </nav>
+  </header>
+  <main id="obsah">
+    <section class="hero" id="uvod" aria-labelledby="heroTitle">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow hero-in">Independent Web Design &amp; Development</div>
+          <h1 class="display hero-in" id="heroTitle"><span class="line">Websites</span><span class="line">with</span><span class="line accent">character<span class="thin">.</span></span></h1>
+          <p class="hero-intro hero-in">I create thoughtful, modern websites for small businesses and entrepreneurs. Visually distinctive, easy to use and built to grow with you.</p>
+          <div class="hero-ctas hero-in">
+            <a class="btn btn-lime" href="#projekty">Explore My Work <svg class="icon"><use href="#arrow-up-right"/></svg></a>
+            <a class="btn btn-outline" href="#kontakt">I Need a Website <svg class="icon"><use href="#arrow-right"/></svg></a>
+          </div>
+          <div class="hero-notes hero-in"><span class="dot" aria-hidden="true"></span> Custom-made Websites <span class="line"></span> Design × Functionality</div>
+        </div>
+        <div class="hero-art" id="heroArt" aria-hidden="true">
+          <div class="art-orbit"></div><div class="art-label">01 / Digital Craft</div>
+          <div class="art-browser art-browser-a"><div class="browser-bar"><i></i><i></i><i></i><span>nova.services / demo</span></div><div class="window-nova"><div class="micro"><span>NOVA SERVICES</span><span>OUR SERVICES　 ABOUT US</span></div><h3>The Details<br><em>Matter.</em></h3><div class="fake-p"></div><span class="fake-cta">GET A FREE QUOTE ↗</span><div class="deco"></div></div></div>
+          <div class="art-browser art-browser-b"><div class="browser-bar bar-dark"><i></i><i></i><i></i><span>inkdistrict / demo</span></div><div class="window-ink"><div class="micro">INK DISTRICT — PREMIUM TATTOO</div><h3>MORE THAN<br><b>TATTOOS.</b></h3></div></div>
+          <div class="art-sticker"><svg class="icon"><use href="#spark"/></svg></div>
+        </div>
+      </div>
+      <div class="container hero-foot"><span>Portfolio / 2026</span><span class="scroll-cue">Explore <i aria-hidden="true"></i></span></div>
+    </section>
+    <div class="ticker" aria-label="Focus: web design, web development, responsive design and attention to detail">
+      <div class="ticker-track" aria-hidden="true">
+        <span>Webdesign <svg class="icon"><use href="#spark"/></svg></span><span>Web Development <svg class="icon"><use href="#spark"/></svg></span><span>Responsive Design <svg class="icon"><use href="#spark"/></svg></span><span>Details &amp; Functionality <svg class="icon"><use href="#spark"/></svg></span>
+        <span>Webdesign <svg class="icon"><use href="#spark"/></svg></span><span>Web Development <svg class="icon"><use href="#spark"/></svg></span><span>Responsive Design <svg class="icon"><use href="#spark"/></svg></span><span>Details &amp; Functionality <svg class="icon"><use href="#spark"/></svg></span>
+      </div>
+    </div>
+    <section class="intro" aria-label="About My Work">
+      <div class="container intro-grid">
+        <div class="intro-left reveal"><span class="eyebrow">My Philosophy</span><span class="small-signature">ŠO<span style="color:#a2b26f">.</span></span></div>
+        <div class="reveal"><p class="big-intro">A great website is more than just a pretty picture. <span class="quiet">It's a first impression, a foundation of trust and an easy path from visiting to working together.</span></p><div class="intro-bottom"><p>I treat every project as unique. I combine clean visuals, intuitive structure and functional details that work for your business.</p><a href="#sluzby" class="link-arrow">How I Work <svg class="icon"><use href="#arrow-up-right"/></svg></a></div></div>
+      </div>
+    </section>
+    <section class="work" id="projekty" aria-labelledby="workTitle">
+      <div class="container">
+        <div class="section-label eyebrow reveal">01 / Selected Work</div>
+        <div class="section-head"><h2 class="display reveal" id="workTitle">Selected<br>Projects<span style="color:#a2ad9e">.</span></h2><p class="reveal">Different industries, different brands and original visual approaches. Explore live website demos — each has its own design, and all are demonstration concepts.</p></div>
+        <div class="filter-row reveal" role="group" aria-label="Filter projects"><button type="button" class="filter" aria-pressed="true" data-filter="all">All Projects</button><button type="button" class="filter" aria-pressed="false" data-filter="business">Business Websites</button><button type="button" class="filter" aria-pressed="false" data-filter="creative">Creative Concepts</button><button type="button" class="filter" aria-pressed="false" data-filter="culture">Culture</button></div>
+        <!-- Projektové karty se automaticky vygenerují z pole PROJECTS ve skriptu dole. -->
+        <div class="projects-grid" id="projectsGrid" aria-live="polite"></div>
+        <div class="work-end reveal"><p>Have something similar in mind? Let's create a website made for you.</p><a href="#kontakt" class="link-arrow">Discuss Your Project <svg class="icon"><use href="#arrow-up-right"/></svg></a></div>
+      </div>
+    </section>
+    <section class="section services" id="sluzby" aria-labelledby="servicesTitle">
+      <div class="container">
+        <div class="eyebrow section-label reveal">02 / What I Offer</div>
+        <div class="section-head"><h2 class="display reveal" id="servicesTitle">From Idea<br>to Finished Website.</h2><p class="reveal">Everything your website needs in one place — from initial structure and design to fine-tuning after launch.</p></div>
+        <div class="service-list">
+          <div class="service-row reveal"><span class="index">01 /</span><h3>Custom Websites</h3><p>Distinctive websites for companies, tradespeople and service providers.</p><svg class="icon"><use href="#arrow-up-right"/></svg></div>
+          <div class="service-row reveal"><span class="index">02 /</span><h3>Responsive Design</h3><p>Thoughtful layouts and effortless navigation on phones, tablets and desktops.</p><svg class="icon"><use href="#arrow-up-right"/></svg></div>
+          <div class="service-row reveal"><span class="index">03 /</span><h3>Modern Visual Identity</h3><p>Colors, typography and a visual style that truly fit your brand.</p><svg class="icon"><use href="#arrow-up-right"/></svg></div>
+          <div class="service-row reveal"><span class="index">04 /</span><h3>Forms &amp; Interactions</h3><p>Contact forms, micro-animations and functional details for a smoother experience.</p><svg class="icon"><use href="#arrow-up-right"/></svg></div>
+          <div class="service-row reveal"><span class="index">05 /</span><h3>SEO Fundamentals &amp; Speed</h3><p>Clear structure, search-engine fundamentals and fast performance.</p><svg class="icon"><use href="#arrow-up-right"/></svg></div>
+          <div class="service-row reveal"><span class="index">06 /</span><h3>Ongoing Website Development</h3><p>New sections, content updates and extensions as your needs evolve.</p><svg class="icon"><use href="#arrow-up-right"/></svg></div>
+        </div>
+      </div>
+    </section>
+    <section class="statement" aria-label="My Approach to Web Design">
+      <div class="container"><div class="eyebrow reveal" style="color:#acb9a1">An Approach That Matters</div><h2 class="display reveal">Fewer Templates.<br>More <em>Character.</em></h2><div class="statement-row"><p class="reveal">Every business has a story. My goal is to give it a memorable online presence that feels effortless to navigate.</p><a href="#kontakt" class="btn btn-lime reveal">Let's Build Your Website <svg class="icon"><use href="#arrow-up-right"/></svg></a></div></div>
+    </section>
+    <section class="process" id="postup" aria-labelledby="processTitle">
+      <div class="container"><div class="eyebrow section-label reveal">03 / How We Work Together</div><div class="section-head"><h2 class="display reveal" id="processTitle">Simple.<br>From Day One.</h2><p class="reveal">No unnecessary complexity. You'll always know what's happening and what comes next.</p></div><div class="process-grid">
+        <div class="process-item reveal"><div class="process-num">01</div><h3>Let's Talk About Your Goals</h3><p>Tell me your idea, goals and what you need your website to achieve.</p></div>
+        <div class="process-item reveal" data-delay="1"><div class="process-num">02</div><h3>I'll Shape the Direction</h3><p>I'll propose the site structure and design, and we'll agree on the scope.</p></div>
+        <div class="process-item reveal" data-delay="2"><div class="process-num">03</div><h3>I'll Build Your Website</h3><p>I'll build a fully functional website, including mobile layouts and fine details.</p></div>
+        <div class="process-item reveal" data-delay="3"><div class="process-num">04</div><h3>We'll Refine &amp; Launch</h3><p>We'll make the agreed changes and get your website ready to go live.</p></div>
+      </div></div>
+    </section>
+    <section class="section faq" id="otazky" aria-labelledby="faqTitle">
+      <div class="container faq-grid"><div class="faq-intro reveal"><span class="eyebrow section-label">04 / FAQ</span><h2 class="display" id="faqTitle">Before You<br>Get in Touch.</h2><p>Clear and simple. And if something is missing, just send me a message.</p></div><div class="faq-items reveal">
+        <details><summary>How much does a website cost? <span class="faq-toggle" aria-hidden="true"></span></summary><p>It depends on the scope, content and features. After a short discussion, I'll prepare a tailored quote so you know what to expect.</p></details>
+        <details><summary>How long does building a website take? <span class="faq-toggle" aria-hidden="true"></span></summary><p>The timeline depends on the scope and how ready the content is. We'll agree on a delivery date before work begins.</p></details>
+        <details><summary>Will my website work on mobile devices? <span class="faq-toggle" aria-hidden="true"></span></summary><p>Absolutely. I design layouts, text sizes and navigation for smaller screens as well, so the website works on everyday devices.</p></details>
+        <details><summary>Can I request changes later? <span class="faq-toggle" aria-hidden="true"></span></summary><p>Of course. Content, sections and features can be updated as your business grows. We'll discuss the scope of any future changes.</p></details>
+        <details><summary>What if I don't have text or photos yet? <span class="faq-toggle" aria-hidden="true"></span></summary><p>That's fine. We'll decide what materials we need and can start with the structure and visual direction.</p></details>
+      </div></div>
+    </section>
+    <section class="contact" id="kontakt" aria-labelledby="contactTitle">
+      <div class="container"><div class="eyebrow reveal">05 / Have a Project?</div><div class="contact-top"><h2 class="reveal" id="contactTitle">Let's<br><span>Create Something.</span></h2><p class="reveal">A new website, a redesign or just a question? Send me a few lines. I'd love to see what we can create together.</p></div><div class="contact-main">
+        <div class="contact-identity reveal"><div><div class="meta" style="margin-bottom:17px">Email Me Directly</div><a class="contact-email" href="mailto:opatrnysimon@gmail.com">opatrnysimon@gmail.com</a><div><button class="copy-email" type="button" id="copyEmail"><svg class="icon"><use href="#copy"/></svg><span>Copy Email</span></button></div></div><div class="contact-personal"><strong>Šimon Opatrný</strong><br>Custom websites and digital experiences.<br><span style="color:#48533e">Easy communication by email.</span></div></div>
+        <form class="brief-form reveal" id="briefForm"><h3 class="form-heading">Tell Me About Your Idea.</h3><p class="form-lead">The form prepares a message in your email app.</p><div class="form-grid"><div class="field"><label for="briefName">Your name *</label><input id="briefName" name="name" autocomplete="name" placeholder="John Smith" required maxlength="90"></div><div class="field"><label for="briefEmail">Email *</label><input id="briefEmail" name="email" type="email" autocomplete="email" placeholder="john@company.com" required maxlength="150"></div></div><div class="field"><label for="briefType">What do you need?</label><select id="briefType" name="type"><option>New Website</option><option>Redesign an Existing Website</option><option>Updates or New Features</option><option>I'd Like Some Advice First</option></select></div><div class="field"><label for="briefMessage">Tell Me a Little About Your Project *</label><textarea id="briefMessage" name="message" placeholder="Tell me about your business, what the site should include and your vision..." required maxlength="2500"></textarea></div><button class="btn btn-lime" type="submit">Prepare Inquiry Email <svg class="icon"><use href="#arrow-up-right"/></svg></button><p class="form-note" id="formNote" role="status">The message isn't sent automatically. You'll confirm it in your email app after clicking.</p></form>
+      </div></div>
+    </section>
+  </main>
+  <footer class="footer"><div class="container"><div class="footer-top"><div class="footer-title">Let's Create Websites<br>That Make <span>Sense.</span></div><div class="footer-right"><div><strong>Navigation</strong><a href="#projekty">Projects</a><a href="#sluzby">Services</a><a href="#postup">Working Together</a><a href="#kontakt">Contact</a></div><div><strong>Contact</strong><a href="mailto:opatrnysimon@gmail.com">Email</a><a href="https://simonopatrny.github.io/simon-webdesign/" target="_blank" rel="noopener noreferrer">Portfolio online ↗</a></div></div></div><div class="footer-bottom"><span>© <span id="year">2026</span> Šimon Opatrný. All rights reserved.</span><span>Crafted with attention to detail.</span><a href="#nahoru" class="backtop">Back to top ↑</a></div></div></footer>
+  <script>
+  'use strict';
+  /* ================================================================
+    PROJEKTY — SEM V BUDOUCNU PŘIDÁVEJ DALŠÍ UKÁZKY.
+    Stačí přidat nový objekt ve stejném formátu:
+      {name:'Název',category:'business',type:'Prezentační web',
+       description:'Krátký popis.',url:'https://...',preview:'generic'}
+    category: business | creative | culture
+    preview: nova | ink | culture | generic
+    Doporučeno: image:'nazev-nahledu.png' (obrázek ve stejné složce jako index.html).
+    Není potřeba vytvářet další HTML kartu — vytvoří se automaticky.
+  ================================================================= */
+  const PROJECTS = [
+    {
+      name:'NOVA Services',
+      category:'business',
+      type:'Business Website / Services',
+      description:'Clean business presentation with clear services, a straightforward process and a contact section.',
+      url:'https://simonopatrny.github.io/demo-sluzby/',
+      preview:'nova',
+      image:'nova-services-nahled.png'
+    },
+    {
+      name:'INK DISTRICT',
+      category:'creative',
+      type:'Tattoo Studio / Creative Website',
+      description:'Bold dark concept with distinctive typography, a portfolio gallery and strong visual identity.',
+      url:'https://simonopatrny.github.io/ink-district-demo/',
+      preview:'ink',
+      image:'ink-district-nahled.png'
+    },
+    {
+      name:'PROSTOR 30',
+      category:'culture',
+      type:'Culture / Community Center',
+      description:'Energetic presentation of a cultural and community center, with an event program and space for the community.',
+      url:'https://simonopatrny.github.io/cultural-center-demo/',
+      preview:'culture',
+      image:'prostor30-nahled.png'
+    },
+    {
+      name:'TURBO Autoservis',
+      category:'business',
+      type:'Auto Repair Shop / Automotive Services',
+      description:'Striking garage website with an industrial feel, service listings and an easy way to request a quote.',
+      url:'https://simonopatrny.github.io/Autoservis-demo/',
+      preview:'generic',
+      image:'autoservis.png'
+    },
+    {
+      name:'CUTLINE Barbershop',
+      category:'creative',
+      type:'Barbershop / Modern Studio',
+      description:'Bold typographic barbershop concept with a haircut gallery, pricing and demo booking.',
+      url:'https://simonopatrny.github.io/Barber-demo/',
+      preview:'generic',
+      image:'barber.png'
+    },
+    {
+      name:'MOU. Patisserie',
+      category:'creative',
+      type:'Patisserie / Desserts & Cakes',
+      description:'Light and elegant patisserie studio featuring dessert photography, a menu and interactive elements.',
+      url:'https://simonopatrny.github.io/Cukrarna-demo/',
+      preview:'generic',
+      image:'cukrarna.png'
+    },
+    {
+      name:'MEZI LESY — Cabins & Guesthouse',
+      category:'business',
+      type:'Accommodation / Cabins & Guesthouse',
+      description:'Atmospheric countryside accommodation website with large photographs, an overview of stays and contact details.',
+      url:'https://simonopatrny.github.io/chaty-penzion-demo/',
+      preview:'generic',
+      image:'chaty_penzion.png'
+    },
+    {
+      name:'Forestry & Logging',
+      category:'business',
+      type:'Forestry Services / Timber Harvesting',
+      description:'Rugged business concept for forestry, logging and timber processing, with a clear service overview.',
+      url:'https://simonopatrny.github.io/les-drevorubectvi/',
+      preview:'generic',
+      image:'les_drevorubectvi.png'
+    },
+    {
+      name:'ZÁHON. Garden Studio',
+      category:'business',
+      type:'Landscaping / Garden Design & Build',
+      description:'Nature-inspired garden studio website showcasing maintenance, landscape projects and a cost calculator.',
+      url:'https://simonopatrny.github.io/Zahrady/',
+      preview:'generic',
+      image:'zahrady.png'
+    }
+  ];
+  const iconArrow = '<svg class="icon" aria-hidden="true"><use href="#arrow-up-right"></use></svg>';
+  const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function sceneMarkup(project){
+    if(project.image){return `<div class="mock-scene scene-generic"><div class="generic-title">${escapeHtml(project.name)}</div><div class="generic-sub">${escapeHtml(project.type)}</div><img class="project-photo" loading="lazy" decoding="async" src="${escapeHtml(project.image)}" alt="Project preview ${escapeHtml(project.name)}" onerror="this.style.display='none'"></div>`;}
+    switch(project.preview){
+      case 'nova':return '<div class="mock-scene scene-nova"><div class="site-mini-nav"><span>NOVA Services.</span><span>SERVICES &nbsp; ABOUT US &nbsp; CONTACT</span></div><div class="site-mini-title">The Details<br><em>Matter.</em></div><div class="site-mini-footer"><span>GET A FREE QUOTE ↗</span><b></b></div><div class="nova-paper">NOVA.<span>From First<br>Contact<br>to Solution.</span><i></i></div></div>';
+      case 'ink':return '<div class="mock-scene scene-ink"><div class="ink-mini-label">INK DISTRICT / PREMIUM TATTOO</div><div class="ink-mini-headline">MORE THAN<br><span>TATTOOS.</span></div><div class="ink-mini-bottom">CUSTOM. PERSONAL. TIMELESS.</div></div>';
+      case 'culture':return '<div class="mock-scene scene-culture"><div class="culture-mini-nav">PROSTOR 30.</div><div class="culture-mini-headline">A PLACE<span>THAT COMES ALIVE.</span></div><div class="culture-mini-sub">KULTURA &nbsp; / &nbsp; KOMUNITA &nbsp; / &nbsp; PRAHA</div></div>';
+      default:return `<div class="mock-scene scene-generic"><div class="generic-title">${escapeHtml(project.name)}</div><div class="generic-sub">${escapeHtml(project.type)}</div></div>`;
+    }
+  }
+  const projectGrid = document.getElementById('projectsGrid');
+  function renderProjects(filter='all') {
+    const visible = PROJECTS.filter(p => filter === 'all' || p.category === filter);
+    projectGrid.innerHTML = visible.map((p,i)=> `
+      <article class="project-card reveal in-view">
+        <a class="project-preview" href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open demo project ${escapeHtml(p.name)} in a new tab">
+          ${sceneMarkup(p)}<span class="open-project">${iconArrow}</span><span class="project-number">${String(PROJECTS.indexOf(p)+1).padStart(2,'0')} / DEMO CONCEPT</span>
+        </a><div class="project-info"><div><div class="project-type">${escapeHtml(p.type)} · Demo Project</div><h3>${escapeHtml(p.name)}</h3><p>${escapeHtml(p.description)}</p></div><a class="project-visit" href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer">Live Demo ${iconArrow}</a></div>
+      </article>`).join('');
+    if(!visible.length) projectGrid.innerHTML='<p>No projects in this category yet.</p>';
+  }
+  renderProjects();
+  document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+    renderProjects(btn.dataset.filter);
+  }));
+  const menuButton = document.getElementById('menuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function setMenu(open){
+    menuButton.setAttribute('aria-expanded',String(open));
+    menuButton.setAttribute('aria-label',open?'Close navigaci':'Open navigation');
+    mobileMenu.classList.toggle('open',open);
+    mobileMenu.inert = !open;
+    document.body.classList.toggle('locked',open);
+    if(open)requestAnimationFrame(()=>mobileMenu.querySelector('a').focus());
+  }
+  menuButton.addEventListener('click',()=>setMenu(menuButton.getAttribute('aria-expanded')!=='true'));
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menuButton.getAttribute('aria-expanded')==='true'){setMenu(false);menuButton.focus();}});
+  window.addEventListener('resize',()=>{if(window.innerWidth>920&&menuButton.getAttribute('aria-expanded')==='true')setMenu(false)},{passive:true});
+  /* animations — progressive enhancement only, never hide content without IntersectionObserver */
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduceMotion){
+    document.body.classList.add('js-reveal');
+    const observer = new IntersectionObserver((entries,obs)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');obs.unobserve(e.target);}})},{threshold:.07,rootMargin:'0px 0px -35px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  }
+  const header=document.getElementById('siteHeader');
+  const progressBar=document.getElementById('progressBar');
+  let scrollQueued=false;
+  function updateScroll(){
+    header.classList.toggle('scrolled',window.scrollY>24);
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+    progressBar.style.transform=`scaleX(${max>0?Math.max(0,Math.min(1,window.scrollY/max)):0})`;
+    scrollQueued=false;
+  }
+  window.addEventListener('scroll',()=>{if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateScroll)}},{passive:true});updateScroll();
+  if('IntersectionObserver' in window){
+    const sections=document.querySelectorAll('section[id]');
+    const sectionObserver=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.desktop-nav a[href^="#"]').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}});
+    },{rootMargin:'-40% 0px -55% 0px'});
+    sections.forEach(s=>sectionObserver.observe(s));
+  }
+  if(!reduceMotion && window.matchMedia('(pointer:fine)').matches){
+    const art=document.getElementById('heroArt');
+    let moveQueued=false,mx=0,my=0;
+    art.addEventListener('pointermove',e=>{
+      const r=art.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;
+      if(!moveQueued){moveQueued=true;requestAnimationFrame(()=>{art.style.setProperty('--mx',mx.toFixed(3));art.style.setProperty('--my',my.toFixed(3));moveQueued=false;});}
+    },{passive:true});
+    art.addEventListener('pointerleave',()=>{art.style.setProperty('--mx','0');art.style.setProperty('--my','0')});
+  }
+  document.getElementById('year').textContent=new Date().getFullYear();
+  document.getElementById('copyEmail').addEventListener('click',async function(){
+    const label=this.querySelector('span');
+    try{await navigator.clipboard.writeText('opatrnysimon@gmail.com');label.textContent='Copied';}
+    catch(_){label.textContent='Please select the email address above';}
+    setTimeout(()=>{label.textContent='Copy Email'},2300);
+  });
+  document.getElementById('briefForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!this.reportValidity())return;
+    const name=document.getElementById('briefName').value.trim();
+    const email=document.getElementById('briefEmail').value.trim();
+    const type=document.getElementById('briefType').value;
+    const message=document.getElementById('briefMessage').value.trim();
+    if(!name||!email||!message)return;
+    const subject=encodeURIComponent('Website Inquiry — '+type);
+    const body=encodeURIComponent('Hello,\n\n'+message+'\n\nProject Type: '+type+'\nName: '+name+'\nContact Email: '+email+'\n');
+    document.getElementById('formNote').textContent='Opening your email app. Send the message from there. If the app doesn\'t open, email the address shown beside the form.';
+    window.location.href='mailto:opatrnysimon@gmail.com?subject='+subject+'&body='+body;
+  });
+  </script>
+</body>
+</html>
